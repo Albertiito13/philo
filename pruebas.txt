@@ -1,0 +1,71 @@
+==============================
+🔹 1. PRUEBAS FUNCIONALES BÁSICAS
+==============================
+
+✅ Todos los filósofos comen sin morir:
+./philo 5 800 200 200
+
+✅ Todos comen N veces y programa termina:
+./philo 5 800 200 200 3
+
+✅ Solo 1 filósofo: debe coger un tenedor y morir después de time_to_die:
+./philo 1 800 200 200
+
+✅ Argumentos con espacios y comillas:
+./philo "5 800 200 200"
+./philo "2 300" "100 100" 3
+
+==============================
+🔹 2. CASOS LÍMITE Y COMPORTAMIENTOS SUTILES
+==============================
+
+✅ El filósofo no muere mientras está empezando a comer:
+./philo 2 310 200 100
+
+✅ Control de tiempos ajustados (peligro de muerte):
+./philo 2 201 200 200
+
+✅ El tiempo de comer más largo que el de morir:
+./philo 2 300 400 100 (deben morir al intentar comer)
+
+✅ Cada filósofo come exactamente N veces:
+./philo 5 800 200 200 7
+
+==============================
+🔹 3. VALIDACIÓN DE ARGUMENTOS
+==============================
+
+❌ Menos de 4 o más de 5 argumentos:
+./philo 5 800 200
+./philo 5 800 200 200 3 100
+
+❌ Argumentos no numéricos:
+./philo 5 800 abc 200
+./philo hola mundo
+
+❌ Números negativos o cero:
+./philo 0 800 200 200
+./philo -1 800 200 200
+./philo 5 -800 200 200
+
+✅ Comprobación de límites grandes:
+./philo 200 800 200 200 3
+
+==============================
+🔹 4. PROTECCIÓN Y CONDICIONES DE CARRERA
+==============================
+
+✅ No hay solapamiento en los mensajes (protegido por mutex de impresión):
+./philo 5 800 200 200
+
+✅ El filósofo no muere mientras actualiza `last_meal_time`:
+Usar tiempos límite:
+./philo 3 210 200 100
+
+✅ No hay deadlock (todos pueden comer eventualmente):
+./philo 5 800 200 200
+
+✅ Mutexes destruidos correctamente al final:
+valgrind --leak-check=full ./philo 5 800 200 200
+
+

@@ -6,7 +6,7 @@
 /*   By: albcamac <albcamac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 15:54:29 by albcamac          #+#    #+#             */
-/*   Updated: 2025/07/18 23:14:22 by albcamac         ###   ########.fr       */
+/*   Updated: 2025/07/19 02:42:05 by albcamac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ static int	parse_args(int argc, char **argv, t_rules *rules)
 	else
 		rules->must_eat_count = -1;
 	if (rules->number_of_philosophers <= 0
-		|| rules->time_to_die <= 0
-		|| rules->time_to_eat <= 0
-		|| rules->time_to_sleep <= 0
+		|| rules->time_to_die <= 59
+		|| rules->time_to_eat <= 59
+		|| rules->time_to_sleep <= 59
 		|| (argc == 5 && rules->must_eat_count <= 0))
 		return (1);
 	rules->someone_died = 0;
@@ -103,7 +103,7 @@ int	main(int argc, char **argv)
 	if (!philos)
 		return (printf("Error: philos init failed\n"), 1);
 	start_threads(philos, &rules);
-	destroy_mutexes(&rules);
+	destroy_mutexes(&rules, philos);
 	(free(philos), free(rules.forks), free_split(args));
 	return (0);
 }

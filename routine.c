@@ -6,7 +6,7 @@
 /*   By: albcamac <albcamac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 15:58:44 by albcamac          #+#    #+#             */
-/*   Updated: 2025/07/04 17:07:20 by albcamac         ###   ########.fr       */
+/*   Updated: 2025/07/19 02:16:17 by albcamac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,11 @@ static void	take_forks(t_philo *philo)
 static void	eat(t_philo *philo)
 {
 	print_status(philo, "is eating");
-	philo->last_meal_time = current_timestamp();
-	philo->meals_eaten++;
+	pthread_mutex_lock(&philo->meal_lock);
 	precise_sleep(philo->rules->time_to_eat);
+	philo->last_meal_time = current_timestamp();
+	pthread_mutex_unlock(&philo->meal_lock);
+	philo->meals_eaten++;
 	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(philo->right_fork);
 }
