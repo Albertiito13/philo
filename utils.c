@@ -6,7 +6,7 @@
 /*   By: albcamac <albcamac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 15:48:27 by albcamac          #+#    #+#             */
-/*   Updated: 2025/07/18 22:19:19 by albcamac         ###   ########.fr       */
+/*   Updated: 2025/07/21 22:11:23 by albcamac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	precise_sleep(long time_in_ms)
 
 	start = current_timestamp();
 	while ((current_timestamp() - start) < time_in_ms)
-		usleep(100);
+		usleep(500);
 }
 
 static char	*get_color(char *msg)
@@ -52,14 +52,17 @@ void	print_status(t_philo *philo, char *msg)
 {
 	long	timestamp;
 	char	*color;
+	int		dead;
 
+	pthread_mutex_lock(&philo->rules->death_lock);
+	dead = philo->rules->someone_died;
+	pthread_mutex_unlock(&philo->rules->death_lock);
+	if (dead)
+		return ;
 	pthread_mutex_lock(&philo->rules->print_lock);
-	if (!philo->rules->someone_died)
-	{
-		timestamp = current_timestamp() - philo->rules->start_time;
-		color = get_color(msg);
-		printf("%s%ld %d %s\033[0m\n", color, timestamp, philo->id, msg);
-	}
+	timestamp = current_timestamp() - philo->rules->start_time;
+	color = get_color(msg);
+	printf("%s%ld %d %s\033[0m\n", color, timestamp, philo->id, msg);
 	pthread_mutex_unlock(&philo->rules->print_lock);
 }
 

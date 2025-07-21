@@ -6,7 +6,7 @@
 /*   By: albcamac <albcamac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 15:53:12 by albcamac          #+#    #+#             */
-/*   Updated: 2025/07/21 18:02:35 by albcamac         ###   ########.fr       */
+/*   Updated: 2025/07/21 19:16:27 by albcamac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	init_mutexes(t_rules *rules)
 			return (1);
 		i++;
 	}
+	if (pthread_mutex_init(&rules->death_lock, NULL))
+		return (1);
 	if (pthread_mutex_init(&rules->print_lock, NULL))
 		return (1);
 	return (0);
@@ -67,5 +69,6 @@ void	destroy_mutexes(t_rules *rules, t_philo *philos)
 		pthread_mutex_destroy(&philos[i].meal_lock);
 		i++;
 	}
+	pthread_mutex_destroy(&rules->death_lock);
 	pthread_mutex_destroy(&rules->print_lock);
 }

@@ -6,7 +6,7 @@
 /*   By: albcamac <albcamac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 15:43:56 by albcamac          #+#    #+#             */
-/*   Updated: 2025/07/21 18:08:08 by albcamac         ###   ########.fr       */
+/*   Updated: 2025/07/21 19:03:13 by albcamac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_rules
 	int				must_eat_count;
 	long			start_time;
 	int				someone_died;
+	pthread_mutex_t	death_lock;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print_lock;
 }	t_rules;
@@ -60,6 +61,7 @@ void	destroy_mutexes(t_rules *rules, t_philo *philos);
 
 // routine.c
 void	*routine(void *arg);
+int		is_someone_dead(t_rules *rules);
 
 // monitor.c
 void	*monitor(void *arg);
