@@ -6,7 +6,7 @@
 /*   By: albcamac <albcamac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 16:05:43 by albcamac          #+#    #+#             */
-/*   Updated: 2025/07/19 02:21:50 by albcamac         ###   ########.fr       */
+/*   Updated: 2025/07/21 16:46:10 by albcamac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@ static int	check_death(t_philo *philo)
 	long	now;
 
 	now = current_timestamp();
-	pthread_mutex_lock(&philo->meal_lock);
 	if ((now - philo->last_meal_time) > philo->rules->time_to_die)
 	{
-		pthread_mutex_unlock(&philo->meal_lock);
 		pthread_mutex_lock(&philo->rules->print_lock);
 		if (!philo->rules->someone_died)
 		{
@@ -31,7 +29,6 @@ static int	check_death(t_philo *philo)
 		pthread_mutex_unlock(&philo->rules->print_lock);
 		return (1);
 	}
-	pthread_mutex_unlock(&philo->meal_lock);
 	return (0);
 }
 

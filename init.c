@@ -6,7 +6,7 @@
 /*   By: albcamac <albcamac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 15:53:12 by albcamac          #+#    #+#             */
-/*   Updated: 2025/07/19 02:03:06 by albcamac         ###   ########.fr       */
+/*   Updated: 2025/07/21 16:53:10 by albcamac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ t_philo	*init_philosophers(t_rules *rules)
 		philos[i].id = i + 1;
 		philos[i].meals_eaten = 0;
 		philos[i].last_meal_time = current_timestamp();
-		pthread_mutex_init(&philos[i].meal_lock, NULL);
 		philos[i].rules = rules;
 		philos[i].left_fork = &rules->forks[i];
 		philos[i].right_fork = &rules->forks[(i + 1)
@@ -56,7 +55,7 @@ t_philo	*init_philosophers(t_rules *rules)
 	return (philos);
 }
 
-void	destroy_mutexes(t_rules *rules, t_philo *philos)
+void	destroy_mutexes(t_rules *rules)
 {
 	int	i;
 
@@ -64,7 +63,6 @@ void	destroy_mutexes(t_rules *rules, t_philo *philos)
 	while (i < rules->number_of_philosophers)
 	{
 		pthread_mutex_destroy(&rules->forks[i]);
-		pthread_mutex_destroy(&philos[i].meal_lock);
 		i++;
 	}
 	pthread_mutex_destroy(&rules->print_lock);

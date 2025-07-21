@@ -6,14 +6,14 @@
 #    By: albcamac <albcamac@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/04 15:55:07 by albcamac          #+#    #+#              #
-#    Updated: 2025/07/18 22:57:25 by albcamac         ###   ########.fr        #
+#    Updated: 2025/07/21 16:56:51 by albcamac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror # -fsanitize=thread -g3
 
 SRC = main.c utils.c init.c routine.c monitor.c split.c split2.c
 OBJ = $(SRC:.c=.o)

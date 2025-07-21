@@ -6,7 +6,7 @@
 /*   By: albcamac <albcamac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 15:54:29 by albcamac          #+#    #+#             */
-/*   Updated: 2025/07/19 02:42:05 by albcamac         ###   ########.fr       */
+/*   Updated: 2025/07/21 16:46:52 by albcamac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	main(int argc, char **argv)
 	if (!philos)
 		return (printf("Error: philos init failed\n"), 1);
 	start_threads(philos, &rules);
-	destroy_mutexes(&rules, philos);
+	destroy_mutexes(&rules);
 	(free(philos), free(rules.forks), free_split(args));
 	return (0);
 }
