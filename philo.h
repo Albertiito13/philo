@@ -6,7 +6,7 @@
 /*   By: albcamac <albcamac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 15:43:56 by albcamac          #+#    #+#             */
-/*   Updated: 2025/07/21 16:47:28 by albcamac         ###   ########.fr       */
+/*   Updated: 2025/07/21 18:08:08 by albcamac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_philo
 	int				id;
 	int				meals_eaten;
 	long			last_meal_time;
+	pthread_mutex_t	meal_lock;
 	pthread_t		thread;
 	t_rules			*rules;
 	pthread_mutex_t	*left_fork;
@@ -55,7 +56,7 @@ char	**flatten_args(int argc, char **argv);
 // init.c
 int		init_mutexes(t_rules *rules);
 t_philo	*init_philosophers(t_rules *rules);
-void	destroy_mutexes(t_rules *rules);
+void	destroy_mutexes(t_rules *rules, t_philo *philos);
 
 // routine.c
 void	*routine(void *arg);
