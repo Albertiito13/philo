@@ -6,14 +6,14 @@
 #    By: albcamac <albcamac@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/04 15:55:07 by albcamac          #+#    #+#              #
-#    Updated: 2025/07/21 21:01:18 by albcamac         ###   ########.fr        #
+#    Updated: 2025/08/12 17:08:39 by albcamac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=thread -g3
+CFLAGS = -Wall -Wextra -Werror ##-fsanitize=thread -g3
 
 SRC = main.c utils.c init.c routine.c monitor.c split.c split2.c
 OBJ = $(SRC:.c=.o)
@@ -30,3 +30,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re

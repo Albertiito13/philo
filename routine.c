@@ -6,7 +6,7 @@
 /*   By: albcamac <albcamac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 15:58:44 by albcamac          #+#    #+#             */
-/*   Updated: 2025/07/21 22:12:05 by albcamac         ###   ########.fr       */
+/*   Updated: 2025/08/12 17:31:35 by albcamac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	take_forks(t_philo *philo, t_rules *rules)
 		if (philo->rules->number_of_philosophers == 1)
 		{
 			while (!is_someone_dead(rules))
-				usleep(100);
+				usleep(1000);
 			pthread_mutex_unlock(philo->left_fork);
 			return ;
 		}
